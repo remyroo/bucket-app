@@ -17,7 +17,7 @@
         </tr>
     </thead>
     <tbody *ngIf='bucketlists'>
-        <tr *ngFor='let bucketlist of bucketlists'>
+        <tr *ngFor='let bucketlist of bucketlists; let i = index'>
             <td><a [routerLink]="['/bucket', bucketlist.id]"> {{ bucketlist.name }}</a></td>
             <td>{{ bucketlist.date_created }}</td>
             <td>{{ bucketlist.date_modified }}</td>
@@ -47,4 +47,3 @@
             </div>
         </tr>
     </tbody>
-

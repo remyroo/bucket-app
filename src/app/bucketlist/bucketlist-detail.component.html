@@ -24,6 +24,7 @@
             <th>Date Created</th>
             <th>Date Modified</th>
             <th>Created by</th>
+            <th>Done</th>
         </tr>
     </thead>
     <tbody *ngIf="bucketlist">
@@ -33,6 +34,7 @@
             <td>{{ item.date_created }}</td>
             <td>{{ item.date_modified }}</td>
             <td>{{ item.created_by }}</td>
+            <td> <i class="glyphicon glyphicon-ok" *ngIf='item.done'></i></td>
             <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal' + i"
                     (click)='onEdit(item.name, item.done)'>Edit</button>
