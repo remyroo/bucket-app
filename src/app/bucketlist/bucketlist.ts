@@ -7,6 +7,13 @@ export interface IBucketlist {
     items: IItem[];
 }
 
+export interface IData {
+    count: number;
+    next: string;
+    previous: string;
+    results: IBucketlist[];
+}
+
 export interface IItem {
     id: number;
     name: string;

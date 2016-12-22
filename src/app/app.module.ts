@@ -5,8 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AuthLoginComponent } from './auth/auth.login.component';
-import { AuthRegisterComponent } from './auth/auth.register.component';
+import { AuthUserComponent } from './auth/auth.component';
 import { AuthService } from './auth/auth.service';
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
 import { BucketlistDetailComponent } from './bucketlist/bucketlist-detail.component';
@@ -15,8 +14,7 @@ import { BucketlistService } from './bucketlist/bucketlist.service';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthLoginComponent,
-    AuthRegisterComponent,
+    AuthUserComponent,
     BucketlistComponent,
     BucketlistDetailComponent
   ],
@@ -25,8 +23,7 @@ import { BucketlistService } from './bucketlist/bucketlist.service';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: 'login', component: AuthLoginComponent},
-      {path: 'register', component: AuthRegisterComponent},
+      {path: 'auth/user', component: AuthUserComponent},
       {path: 'bucket', component: BucketlistComponent},
       {path: 'bucket/:id', component: BucketlistDetailComponent},
       {path: '**', redirectTo: 'bucket', pathMatch: 'full'}

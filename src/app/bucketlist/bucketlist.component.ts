@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { BucketlistService } from './bucketlist.service';
-import { IBucketlist } from './bucketlist';
+import { IBucketlist, IData } from './bucketlist';
 
 
 @Component({
@@ -9,14 +10,34 @@ import { IBucketlist } from './bucketlist';
 })
 export class BucketlistComponent implements OnInit {
     bucketlists: IBucketlist[];
+    data: IData;
+    name: string;
     errorMessage: string;
 
-    constructor(private _bucketlistService: BucketlistService) {
+    constructor(private _bucketlistService: BucketlistService,
+                private _route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
         this._bucketlistService.getAllBucketlists()
-            .subscribe(bucketlists => this.bucketlists = bucketlists,
+            .subscribe(data => {
+                this.data = data;
+                this.bucketlists = data.results;
+            },
             error => this.errorMessage = <any>error);
+        
+    }
+    createBucketlist(): void {
+        this._bucketlistService.createBucketlist(this.name)
+            .subscribe(result => {
+                console.log('Bucketlist created')
+            })
+    }
+
+    deleteBucketlist(id: number): void {
+        this._bucketlistService.deleteBucketlist(id)
+            .subscribe(result => {
+                console.log('Bucketlist deleted')
+            })
     }
 }

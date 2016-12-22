@@ -1,0 +1,35 @@
+<div class='table-responsive'>
+<table class='table'>
+    <thead>
+        <tr>
+            <th>Welcome to Bucket</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                username: <input type='text'
+                  [(ngModel)]='username' />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                password: <input type='text'
+                  [(ngModel)]='password' />
+            </td>
+        </tr>
+        <tr>
+            <button class='btn btn-primary'
+                (click)='registerUser()'>
+                Register
+            </button>
+        </tr>
+                <tr>
+            <button class='btn btn-primary'
+                (click)='loginUser()'>
+                Login
+            </button>
+        </tr>
+    </tbody>
+</table>
+</div>

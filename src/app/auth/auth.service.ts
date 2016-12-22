@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -8,20 +8,24 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthService {
     private _authUrl = 'http://127.0.0.1:8000/api/auth/';
+    private _headers: Headers;
 
-    constructor(private _http: Http){}
+    constructor(private _http: Http){
+        this._headers = new Headers();
+        this._headers.append('Content-Type', 'application/json')
+    }
 
-    registerUser(name: string, password: string) {
-        return this._http.post(this._authUrl+"register", {name, password})
+    registerUser(username: string, password: string) {
+        return this._http.post(this._authUrl+"register", JSON.stringify({username, password}), {headers:this._headers})
         .map((response:Response) => response.json())
-        .do(data => console.log('Data: ' + JSON.stringify(data)))
         .catch(this.handleError);
     }
 
-    loginUser(name: string, password: string) {
-        return this._http.post(this._authUrl+"login", {name, password})
-        .map((response:Response) => response.json())
-        .do(data => console.log('Data: ' + JSON.stringify(data)))
+    loginUser(username: string, password: string) {
+        return this._http.post(this._authUrl+"login", JSON.stringify({username, password}), {headers:this._headers})
+        .map((response:Response)=>{
+            localStorage.setItem('token', response.json().token);
+        })
         .catch(this.handleError);
     }
 
