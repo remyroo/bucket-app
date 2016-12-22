@@ -8,17 +8,10 @@
 </nav>
 </div>
 <div>
-   name: <input type='text' [(ngModel)]='name' />
+   Name: <input type='text' [(ngModel)]='name' />
     <button class='btn btn-primary'
         (click)='createItem()'>
         Create Item
-    </button>
-</div>
-<div>
-   name: <input type='text' [(ngModel)]='name' />
-    <button class='btn btn-primary'
-        (click)='updateItemName(item.id)'>
-        Update Item Name
     </button>
 </div>
 <h1>List of items</h1>
@@ -34,17 +27,39 @@
         </tr>
     </thead>
     <tbody *ngIf="bucketlist">
-        <tr *ngFor='let item of bucketlist.items'>
+        <tr *ngFor='let item of bucketlist.items; let i = index'>
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.date_created }}</td>
             <td>{{ item.date_modified }}</td>
             <td>{{ item.created_by }}</td>
             <td>
-                <button class='btn btn-primary'
-                (click)='deleteItem(item.id)'>
-                Delete
-                </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal' + i"
+                    (click)='onEdit(item.name, item.done)'>Edit</button>
+                <button class='btn btn-primary' (click)='deleteItem(item.id)'>Delete</button>
             </td>
+            <!-- Modal -->
+            <div [id]="'myModal' + i" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit {{item.name}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        Name: <input type='text' [(ngModel)]='updatedName' />
+                        Done: <input type='checkbox' [(ngModel)]='done' />
+                    </div>
+                    <div class="modal-footer">
+                        <button class='btn btn-primary'(click)='updateItem(item.id, item.name, item.done)'  data-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </tr>
     </tbody>
+
+    
+

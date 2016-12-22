@@ -34,10 +34,21 @@ export class BucketlistComponent implements OnInit {
             })
     }
 
+    updateBucketlist(id: number): void {
+        this._bucketlistService.updateBucketlist(id, this.name)
+            .subscribe(result => {
+                console.log('Bucketlist updated')
+            })
+    }
+
     deleteBucketlist(id: number): void {
         this._bucketlistService.deleteBucketlist(id)
             .subscribe(result => {
                 console.log('Bucketlist deleted')
             })
+    }
+
+    onEdit(name: string, done: boolean): void {
+        this.name = name;
     }
 }
