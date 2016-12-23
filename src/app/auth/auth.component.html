@@ -8,13 +8,13 @@
     <tbody>
         <tr>
             <td>
-                username: <input type='text'
+                <input type='text' placeholder='Username'
                   [(ngModel)]='username' />
             </td>
         </tr>
         <tr>
             <td>
-                password: <input type='text'
+                <input type='text' placeholder='Password'
                   [(ngModel)]='password' />
             </td>
         </tr>
@@ -24,7 +24,8 @@
                 Register
             </button>
         </tr>
-                <tr>
+        <tr>
+            {{username}}
             <button class='btn btn-primary'
                 (click)='loginUser()'>
                 Login

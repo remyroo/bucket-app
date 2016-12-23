@@ -1,10 +1,7 @@
 <h1>List of bucketlists</h1>
 <div>
-   Name: <input type='text' [(ngModel)]='name' />
-    <button class='btn btn-primary'
-        (click)='createBucketlist()'>
-        Create Bucketlist
-    </button>
+   <input type='text' [(ngModel)]='name' placeholder='Name'/>
+   <button class='btn btn-primary'(click)='createBucketlist()'>Create Bucketlist</button>
 </div>
 <div class='table-responsive'>
 <table class='table'>
@@ -17,7 +14,7 @@
         </tr>
     </thead>
     <tbody *ngIf='bucketlists'>
-        <tr *ngFor='let bucketlist of bucketlists; let i = index'>
+        <tr *ngFor='let bucketlist of bucketlists | paginate: { itemsPerPage: 10, currentPage: p, totalItems: count }; let i = index'>
             <td><a [routerLink]="['/bucket', bucketlist.id]"> {{ bucketlist.name }}</a></td>
             <td>{{ bucketlist.date_created }}</td>
             <td>{{ bucketlist.date_modified }}</td>
@@ -46,4 +43,5 @@
                 </div>
             </div>
         </tr>
+        <div class='row'><pagination-controls (pageChange)="p = $event" #api></pagination-controls></div>
     </tbody>

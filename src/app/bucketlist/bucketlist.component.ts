@@ -24,21 +24,38 @@ export class BucketlistComponent implements OnInit {
                 this.data = data;
                 this.bucketlists = data.results;
             },
-            error => this.errorMessage = <any>error);
-        
+            error => {alert(error)}
+        );
     }
+
     createBucketlist(): void {
         this._bucketlistService.createBucketlist(this.name)
             .subscribe(result => {
                 console.log('Bucketlist created')
-            })
+            },
+        error => {
+            if(error.name) {
+                alert('Please enter a name')
+            }
+            else if(error.non_field_errors) {
+                alert(error.non_field_errors[0])
+            }
+            ;});
     }
 
     updateBucketlist(id: number): void {
         this._bucketlistService.updateBucketlist(id, this.name)
             .subscribe(result => {
                 console.log('Bucketlist updated')
-            })
+            },
+        error => {
+            if(error.name) {
+                alert('Please enter a name')
+            }
+            else if(error.non_field_errors) {
+                alert(error.non_field_errors[0])
+            }
+            ;});
     }
 
     deleteBucketlist(id: number): void {

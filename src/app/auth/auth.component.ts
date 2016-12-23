@@ -12,22 +12,22 @@ export class AuthUserComponent {
     password: string;
     errorMessage: string;
 
-    constructor(private router: Router, private _authService: AuthService) {
+    constructor(private _router: Router, private _authService: AuthService) {
     }
 
     registerUser(): void{
         this._authService.registerUser(this.username, this.password)
             .subscribe(result => {
-                this.router.navigate(['bucket'])
+                this._router.navigate(['bucket'])
             },
-            error => this.errorMessage = <any>error);
+            error => alert('Please enter a valid username and password'));
     }
 
     loginUser() {
         this._authService.loginUser(this.username, this.password)
             .subscribe(result => {
-                this.router.navigate(['bucket']);
+                this._router.navigate(['bucket']);
             },
-            error => this.errorMessage = <any>error);
+            error => alert('Please enter a valid username and password'));
     }
 }
