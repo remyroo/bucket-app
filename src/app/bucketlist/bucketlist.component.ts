@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { BucketlistService } from './bucketlist.service';
 import { IBucketlist, IData } from './bucketlist';
@@ -12,9 +13,11 @@ export class BucketlistComponent implements OnInit {
     bucketlists: IBucketlist[];
     data: IData;
     name: string;
+    updatedName: string;
     errorMessage: string;
 
     constructor(private _bucketlistService: BucketlistService,
+                private _router: Router,
                 private _route: ActivatedRoute) {
     }
 
@@ -24,14 +27,16 @@ export class BucketlistComponent implements OnInit {
                 this.data = data;
                 this.bucketlists = data.results;
             },
-            error => {alert(error)}
+            error => {alert(error.detail)
+            this._router.navigate(['auth/user'])}
         );
     }
 
     createBucketlist(): void {
         this._bucketlistService.createBucketlist(this.name)
             .subscribe(result => {
-                console.log('Bucketlist created')
+                console.log('Bucketlist created');
+                this.bucketlists.push(result)
             },
         error => {
             if(error.name) {
@@ -43,10 +48,10 @@ export class BucketlistComponent implements OnInit {
             ;});
     }
 
-    updateBucketlist(id: number): void {
-        this._bucketlistService.updateBucketlist(id, this.name)
+    updateBucketlist(id: number, name: string): void {
+        this._bucketlistService.updateBucketlist(id, name)
             .subscribe(result => {
-                console.log('Bucketlist updated')
+                console.log('Bucketlist updated');
             },
         error => {
             if(error.name) {
@@ -61,7 +66,8 @@ export class BucketlistComponent implements OnInit {
     deleteBucketlist(id: number): void {
         this._bucketlistService.deleteBucketlist(id)
             .subscribe(result => {
-                console.log('Bucketlist deleted')
+                console.log('Bucketlist deleted');
+                this.bucketlists.pop()
             })
     }
 
