@@ -8,6 +8,7 @@ export interface IBucketlist {
 }
 
 export interface IData {
+    // describes the pagination data type
     count: number;
     next: string;
     previous: string;

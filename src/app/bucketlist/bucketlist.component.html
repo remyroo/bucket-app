@@ -3,6 +3,8 @@
    <input type='text' [(ngModel)]='name' placeholder='Name'/>
    <button class='btn btn-primary'(click)='createBucketlist()'>Create Bucketlist</button>
 </div>
+<div class="alert alert-danger" *ngIf="errorDuplicate">This bucket already exists</div>
+<div class="alert alert-danger" *ngIf="errorBlank">Please enter a valid bucket name</div>
 <div class='table-responsive'>
 <table class='table'>
     <thead>
@@ -19,29 +21,30 @@
             <td>{{ bucketlist.date_created }}</td>
             <td>{{ bucketlist.date_modified }}</td>
             <td>{{ bucketlist.created_by }}</td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="'#myModal' + i"
-                    (click)='onEdit(bucketlist.name)'>Edit</button>
-                <button class='btn btn-primary'(click)='deleteBucketlist(bucketlist.id)'>Delete</button>
+            <td>
+                <button type='button' class='btn btn-primary' data-toggle='modal' [attr.data-target]="'#myModal' + i"
+                (click)='onEdit(bucketlist.name)'>Edit</button>
+                <button class='btn btn-primary' (click)='deleteBucketlist(bucketlist.id)'>Delete</button>
             </td>
              <!-- Modal -->
-            <div [id]="'myModal' + i" class="modal fade" role="dialog">
-                <div class="modal-dialog">
+            <div [id]="'myModal' + i" class='modal fade 'role='dialog'>
+                <div class='modal-dialog'>
                     <!-- Modal content-->
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Edit {{bucketlist.name}}</h4>
+                    <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal'
+                        (click)='cancelEdit(i)'>&times;</button>
+                        <h4 class='modal-title'>Edit {{bucketlist.name}}</h4>
                     </div>
-                    <div class="modal-body">
-                        Name: <input type='text' [(ngModel)]='bucketlist.name' />
+                    <div class='modal-body'>
+                        Name: <input type='text' [(ngModel)]='bucketlist.name' required #bucketlistName=ngModel class='form-control' />
                     </div>
-                    <div class="modal-footer">
-                        <button class='btn btn-primary'(click)='updateBucketlist(bucketlist.id, bucketlist.name);'  data-dismiss="modal">Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class='modal-footer'>
+                        <button class='btn btn-primary'(click)='updateBucketlist(bucketlist.id, bucketlist.name, i);' data-dismiss='modal'[disabled]='bucketlistName.invalid'>Save</button>
                     </div>
                     </div>
                 </div>
             </div>
         </tr>
-        <div class='row'><pagination-controls (pageChange)="p = $event" #api></pagination-controls></div>
+        <div class='row'><pagination-controls (pageChange)='p = $event '#api></pagination-controls></div>
     </tbody>

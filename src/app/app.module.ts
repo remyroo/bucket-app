@@ -35,6 +35,6 @@ import { BucketlistGuard } from './bucketlist/bucketlist-guard.service';
     ]),
   ],
   providers: [ AuthService, BucketlistService, BucketlistGuard ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

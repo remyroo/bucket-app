@@ -11,6 +11,7 @@ export class AppComponent {
    }
 
   logoutUser() {
+    // deletes the token and redirects back to login page
       localStorage.removeItem('token');
       window.location.reload();
       this._router.navigate(['auth/user']);

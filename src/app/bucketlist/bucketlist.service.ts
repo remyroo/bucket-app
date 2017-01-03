@@ -84,6 +84,7 @@ export class BucketlistService {
     }
 
     private handleError(error: Response) {
+        // returns error messages as json
         console.error(error.json());
         return Observable.throw(error.json() || 'Server error');
     }

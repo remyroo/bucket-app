@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BucketlistService } from './bucketlist.service';
 import { IBucketlist, IData } from './bucketlist';
@@ -13,8 +12,9 @@ export class BucketlistComponent implements OnInit {
     bucketlists: IBucketlist[];
     data: IData;
     name: string;
-    updatedName: string;
-    errorMessage: string;
+    currentName: string;
+    errorBlank = false;
+    errorDuplicate = false;
 
     constructor(private _bucketlistService: BucketlistService,
                 private _router: Router,
@@ -22,12 +22,14 @@ export class BucketlistComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        // populates the page with user's bucketlists from db
         this._bucketlistService.getAllBucketlists()
             .subscribe(data => {
                 this.data = data;
                 this.bucketlists = data.results;
             },
-            error => {alert(error.detail)
+            // redirects unauthorised user back to login page
+            error => {alert("You must register or login to see this page.")
             this._router.navigate(['auth/user'])}
         );
     }
@@ -40,25 +42,23 @@ export class BucketlistComponent implements OnInit {
             },
         error => {
             if(error.name) {
-                alert('Please enter a name')
+                this.errorBlank = true;
             }
             else if(error.non_field_errors) {
-                alert(error.non_field_errors[0])
+                this.errorDuplicate = true;
             }
             ;});
     }
 
-    updateBucketlist(id: number, name: string): void {
+    updateBucketlist(id: number, name: string, index: any): void {
         this._bucketlistService.updateBucketlist(id, name)
             .subscribe(result => {
                 console.log('Bucketlist updated');
             },
         error => {
-            if(error.name) {
-                alert('Please enter a name')
-            }
-            else if(error.non_field_errors) {
-                alert(error.non_field_errors[0])
+            if(error.non_field_errors) {
+                this.bucketlists[index].name = this.currentName; // reverts duplicate value to original pre-edit value
+                this.errorDuplicate = true;
             }
             ;});
     }
@@ -71,7 +71,13 @@ export class BucketlistComponent implements OnInit {
             })
     }
 
-    onEdit(name: string, done: boolean): void {
-        this.name = name;
+    onEdit(name: string): void {
+        // stores current values before they're fields are edited
+        this.currentName = name;
+    }
+
+    cancelEdit(index): void {
+        // reverts to the pre-edit value when modal is closed
+        this.bucketlists[index].name = this.currentName;
     }
 }
