@@ -1,15 +1,22 @@
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        Bucket
-        <button class='btn btn-primary'(click)='logoutUser()'>Logout</button>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="auth/user">Bucket</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item"><a class="nav-item" data-toggle='modal' [attr.data-target]="'#myModal'" *ngIf="!userStatus()">Register</a></li>
+            <li class="nav-item"><a class="nav-item" (click)='logoutUser()' *ngIf="userStatus()">Logout</a></li>
+        </ul>
     </div>
-
-    <router-outlet></router-outlet>
+</nav>
+<div class="full container-fluid">
+    <div class="jumbotron">
+        <router-outlet></router-outlet>
+    </div>
 </div>
-<div class='row'  >
-    <div class='text-center'>Developed by:</div>
-    <h3 class='text-center'>Rehema Wachira</h3>
+<footer>
     <div class='text-center'>
-        <a href='https://github.com/andela-rwachira/bucket-app/'>github.com/andela-rwachira/bucket-app</a>
+        <small><a href='https://github.com/andela-rwachira/bucket-app/'>github.com/andela-rwachira/bucket-app</a></small>
     </div>
-</div>
+</footer>
+

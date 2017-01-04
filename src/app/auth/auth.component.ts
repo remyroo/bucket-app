@@ -18,7 +18,7 @@ export class AuthUserComponent {
     registerUser(): void{
         this._authService.registerUser(this.username, this.password)
             .subscribe(result => {
-                this._router.navigate(['bucket'])
+                this._router.navigate(['auth/user'])
             },
             error => alert('Please enter a valid username and password'));
     }

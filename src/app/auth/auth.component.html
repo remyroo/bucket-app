@@ -1,35 +1,39 @@
-<div class='table-responsive'>
-<table class='table'>
-    <thead>
-        <tr>
-            <th>Welcome to Bucket</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <input type='text' placeholder='Username'
-                  [(ngModel)]='username' />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type='text' placeholder='Password'
-                  [(ngModel)]='password' />
-            </td>
-        </tr>
-        <tr>
-            <button class='btn btn-primary'
-                (click)='registerUser()'>
-                Register
-            </button>
-        </tr>
-        <tr>
-            <button class='btn btn-primary'
-                (click)='loginUser()'>
-                Login
-            </button>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="page-header">
+        <h1>Welcome to Bucket</h1>      
+    </div>
+    <p>A collection of all your bucketlists</p>          
+</div>
+
+<div class="container">
+    <div class="form-group">
+        <input type="text" class="form-control" id="usr" placeholder="Username" [(ngModel)]='username'>
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" id="pwd" placeholder="Password" [(ngModel)]='password'>
+    </div>
+        <button type="button" class="btn btn-outline-primary waves-effect" (click)='loginUser()'>Login</button>
+    <!-- Modal -->
+    <div [id]="'myModal'" class='modal fade' role='dialog'>
+        <div class='modal-dialog'>
+            <!-- Modal content-->
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type='button' class='close' data-dismiss='modal'>&times;</button>
+                <h4 class='modal-title'>Register</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder='Username' required #userName=ngModel [(ngModel)]='username'>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="pwd" placeholder='Password' [(ngModel)]='password'>
+                </div>
+            </div>
+            <div class='modal-footer'>
+                <button class='btn btn-primary' (click)='registerUser()' data-dismiss='modal'[disabled]='userName.invalid'>Register</button>
+            </div>
+            </div>
+        </div>
+    </div>
 </div>
