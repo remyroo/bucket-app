@@ -4,19 +4,17 @@
             <a class="navbar-brand" href="auth/user">Bucket</a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a class="nav-item" data-toggle='modal' [attr.data-target]="'#myModal'" *ngIf="!userStatus()">Register</a></li>
             <li class="nav-item"><a class="nav-item" (click)='logoutUser()' *ngIf="userStatus()">Logout</a></li>
         </ul>
     </div>
 </nav>
-<div class="full container-fluid">
+<div class="full-screen container-fluid">
     <div class="jumbotron">
         <router-outlet></router-outlet>
     </div>
+    <footer>
+        <div class='text-center'>
+            <small><a href='https://github.com/andela-rwachira/bucket-app/'>github.com/andela-rwachira/bucket-app</a></small>
+        </div>
+    </footer>
 </div>
-<footer>
-    <div class='text-center'>
-        <small><a href='https://github.com/andela-rwachira/bucket-app/'>github.com/andela-rwachira/bucket-app</a></small>
-    </div>
-</footer>
-

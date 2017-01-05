@@ -1,0 +1,8 @@
+.text {
+    text-align: center;
+}
+
+.form-control {
+    width: 50%;
+    display: inline-block;
+}

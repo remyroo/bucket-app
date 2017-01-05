@@ -1,8 +1,8 @@
-/*.bg {
-    background-image: url(../assets/images/subtle_white_feathers.png);
-    background-repeat: repeat;
-}*/
 
-.full{
+.full-screen {
     height: 100vh;
+}
+
+.jumbotron {
+    background-color: transparent;
 }

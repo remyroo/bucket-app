@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { BucketlistService } from './bucketlist.service';
 import { IBucketlist } from './bucketlist';
 
 
 @Component({
-    templateUrl: './bucketlist-detail.component.html'
+    templateUrl: './bucketlist-detail.component.html',
+    styleUrls: ['./bucketlist-detail.component.css']
 })
 export class BucketlistDetailComponent implements OnInit {
     bucketlist: IBucketlist;
@@ -20,7 +22,8 @@ export class BucketlistDetailComponent implements OnInit {
 
     constructor(private _bucketlistService: BucketlistService,
                 private _router: Router, 
-                private _route: ActivatedRoute) {
+                private _route: ActivatedRoute,
+                public toastr: ToastsManager) {
     }
 
     ngOnInit(): void {
@@ -28,13 +31,14 @@ export class BucketlistDetailComponent implements OnInit {
             .subscribe((bucketlist) => {
                 this.bucketlist = bucketlist
             },
-            error => {alert("You must register or login to see this page.")
+            error => {this.toastr.error('You must login to see your bucket items.', 'Oops!');
             this._router.navigate(['auth/user'])}
         );
         
     }
 
     createItem(): void {
+        // handles item creation, uses toastr to raise flash messages
         this._bucketlistService.createItem(this.id, this.name)
             .subscribe(result => {
                 console.log('Item created')
@@ -42,20 +46,20 @@ export class BucketlistDetailComponent implements OnInit {
             },
             error => {
                 if(error.name && error.name[0] == 'This field is required.') {
-                    this.errorBlank = true;
+                    this.toastr.error('Please enter a valid item name.', 'Try Again!');
                 }
                 if(error.name && error.name[0] == 'This field may not be blank.') {
-                    this.errorBlank = true;
+                    this.toastr.error('Please enter a valid item name.', 'Try Again!');
                 }
                 else if(error.name && error.name[0] == 'This item already exists.') {
-                    this.errorDuplicate = true;
+                    this.toastr.error('This item already exists.', 'Try Again!');
                 }
             }
         );
     }
 
     updateItem(item_id: number, name: string, done: boolean, index: any): void {
-        // checks if a field has changed to determine which function to call
+        // checks if a field has changed to determine which update function to call
         if(name != this.currentName) {
         this._bucketlistService.updateItemName(this.id, item_id, name)
             .subscribe(result => {
@@ -64,7 +68,7 @@ export class BucketlistDetailComponent implements OnInit {
             error => {
                 if(error.name && error.name[0] == 'This item already exists.') {
                         this.bucketlist.items[index].name = this.currentName; // reverts duplicate value to original pre-edit value
-                        this.errorDuplicate = true;
+                        this.toastr.error('This item already exists.', 'Try Again!');
                     }
             });
         }
@@ -81,11 +85,12 @@ export class BucketlistDetailComponent implements OnInit {
             .subscribe(result => {
                 console.log('Item deleted')
                 this.bucketlist.items.pop()
+                this.toastr.success('Delete successful')
             })
     }
 
     onEdit(name: string, done: boolean): void {
-        // stores current values before they're fields are edited
+        // stores current name and done values before they're edited
         this.currentName = name;
         this.currentDone = done;
     }

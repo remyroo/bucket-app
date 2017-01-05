@@ -1,10 +1,8 @@
-<h1>List of bucketlists</h1>
+<h3>Your bucketlists</h3>
 <div>
-   <input type='text' [(ngModel)]='name' placeholder='Name'/>
-   <button class='btn btn-primary'(click)='createBucketlist()'>Create Bucketlist</button>
+   <input type='text' [(ngModel)]='name' id='nameInput' placeholder='Name'/>
+   <button class='buttons btn btn-outline-primary waves-effect'(click)='createBucketlist()'>New bucket</button>
 </div>
-<div class="alert alert-danger" *ngIf="errorDuplicate">This bucket already exists</div>
-<div class="alert alert-danger" *ngIf="errorBlank">Please enter a valid bucket name</div>
 <div class='table-responsive'>
 <table class='table'>
     <thead>
@@ -22,11 +20,11 @@
             <td>{{ bucketlist.date_modified }}</td>
             <td>{{ bucketlist.created_by }}</td>
             <td>
-                <button type='button' class='btn btn-primary' data-toggle='modal' [attr.data-target]="'#myModal' + i"
+                <button type='button' class='buttons btn btn-outline-primary waves-effect' data-toggle='modal' [attr.data-target]="'#myModal' + i"
                 (click)='onEdit(bucketlist.name)'>Edit</button>
-                <button class='btn btn-primary' (click)='deleteBucketlist(bucketlist.id)'>Delete</button>
+                <button class='buttons btn btn-outline-danger waves-effect' (click)='deleteBucketlist(bucketlist.id)'>Delete</button>
             </td>
-             <!-- Modal -->
+             <!-- Editing Modal -->
             <div [id]="'myModal' + i" class='modal fade' role='dialog'>
                 <div class='modal-dialog'>
                     <!-- Modal content-->
@@ -37,10 +35,10 @@
                         <h4 class='modal-title'>Edit {{bucketlist.name}}</h4>
                     </div>
                     <div class='modal-body'>
-                        Name: <input type='text' [(ngModel)]='bucketlist.name' required #bucketlistName=ngModel class='form-control' />
+                        Name: <input type='text' required [(ngModel)]='bucketlist.name' #bucketlistName=ngModel class='form-control' />
                     </div>
                     <div class='modal-footer'>
-                        <button class='btn btn-primary'(click)='updateBucketlist(bucketlist.id, bucketlist.name, i);' data-dismiss='modal'[disabled]='bucketlistName.invalid'>Save</button>
+                        <button class='buttons btn btn-outline-primary waves-effect'(click)='updateBucketlist(bucketlist.id, bucketlist.name, i);' data-dismiss='modal'[disabled]='bucketlistName.invalid'>Save</button>
                     </div>
                     </div>
                 </div>

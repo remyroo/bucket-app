@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { Ng2PaginationModule } from 'ng2-pagination';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
 
 import { AppComponent } from './app.component';
 import { AuthUserComponent } from './auth/auth.component';
@@ -25,6 +26,7 @@ import { BucketlistGuard } from './bucketlist/bucketlist-guard.service';
     FormsModule,
     HttpModule,
     Ng2PaginationModule,
+    ToastModule,
     RouterModule.forRoot([
       {path: 'auth/user', component: AuthUserComponent},
       {path: 'bucket', component: BucketlistComponent},
