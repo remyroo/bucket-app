@@ -1,4 +1,37 @@
+#header{
+    margin-top: 85px;
+}
+
 #nameInput {
-    width: 50%;
+    width: 50%; 
+}
+
+.card-title {
+    text-align: center;
+}
+
+.card-block{
+    margin: 0 auto;
+    position: absolute;
+}
+
+.btn {
+    position: relative;
+}
+
+.card-footer {
+    width: 100%;
+    position: relative;
+}
+
+.footer {
     display: inline-block;
+    font-size: small;
+    color: #2BBBAD;
+    font-weight: 500;
+    margin-top: 50%;
+}
+
+.default-color-dark {
+     background-color: transparent !important; 
 }
