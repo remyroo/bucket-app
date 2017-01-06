@@ -1,16 +1,25 @@
-#nameInput {
-    margin-left: 200px;
+.text {
+    text-align: center;
+}
+
+.form-control {
+    display: inline-block;
     margin-top: 85px;
-    width: 30%; 
+    width: 30%;
+}
+
+.card-block{
+    display: inline-block;
+    margin: 0 auto;
+    /*position: absolute;*/
 }
 
 .card-title {
     text-align: center;
 }
 
-.card-block{
-    margin: 0 auto;
-    position: absolute;
+.card .card-title a:hover {
+    color: #ff6f69;
 }
 
 .btn {
@@ -22,7 +31,6 @@
     font-size: small;
     color: #2BBBAD;
     font-weight: 500;
-    margin-top: 30%;
 }
 
 .default-color-dark {

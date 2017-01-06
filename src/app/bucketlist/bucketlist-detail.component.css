@@ -14,3 +14,11 @@
     color: #2BBBAD;
     background-color: transparent !important; 
 }
+
+.pager li>a:hover {
+    color: #ff6f69;
+}
+
+.table>tbody>tr>td {
+    vertical-align: middle;
+}

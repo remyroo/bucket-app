@@ -1,9 +1,9 @@
-<div>
-   <input type='text' [(ngModel)]='name' id='nameInput' placeholder='Name'/>
+<div class='text container'>
+   <input type='text' class="form-control" [(ngModel)]='name' id='nameInput' placeholder='Name'/>
    <button class='btn btn-default'(click)='createBucketlist()'>New bucket</button>
 </div>
 <!--Panel-->
-<div class="container">
+<div class="text container">
 <div class="row">
     <div class="col-md-12">
             <div class="data" *ngIf='bucketlists'>
@@ -16,7 +16,7 @@
                         <button class='btn btn-default' (click)='deleteBucketlist(bucketlist.id)'>Delete</button>
                     </div>
                     <div class="card-footer text-muted default-color-dark white-text">
-                        <p class="footer">date created: {{ bucketlist.date_created }}<br>date modified: {{ bucketlist.date_modified }}</p>
+                        <p class="footer">created: {{ bucketlist.date_created | date:'medium' }}<br>edited: {{ bucketlist.date_modified | date:'medium' }}</p>
                     </div>
                     <!--Editing Modal -->
                     <div [id]="'myModal' + i" class='modal fade' role='dialog'>

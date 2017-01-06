@@ -6,3 +6,8 @@
     width: 50%;
     display: inline-block;
 }
+
+#signup a, a:focus, a:hover {
+    color: #ff6f69;
+    text-decoration: underline;
+}

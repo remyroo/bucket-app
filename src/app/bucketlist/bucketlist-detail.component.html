@@ -12,17 +12,17 @@
 <table class='table'>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Date Created</th>
-            <th>Date Modified</th>
+            <th>Item</th>
+            <th>Created</th>
+            <th>Edited</th>
             <th>Done</th>
         </tr>
     </thead>
     <tbody *ngIf="bucketlist">
         <tr *ngFor='let item of bucketlist.items | paginate: { itemsPerPage: 10, currentPage: p, totalItems: count }; let i = index'>
             <td>{{ item.name }}</td>
-            <td>{{ item.date_created }}</td>
-            <td>{{ item.date_modified }}</td>
+            <td>{{ item.date_created | date:'medium' }}</td>
+            <td>{{ item.date_modified | date:'medium' }}</td>
             <td> <i class="glyphicon glyphicon-ok" *ngIf='item.done'></i>
                  <i class="glyphicon glyphicon-remove" *ngIf='!item.done'></i></td>
             <td>
@@ -40,7 +40,7 @@
                         <h4 class='modal-title'>Edit {{item.name}}</h4>
                     </div>
                     <div class='modal-body'>
-                        Name: <input type='text' [(ngModel)]='item.name' required #itemName=ngModel class='form-control'>
+                        <input type='text' [(ngModel)]='item.name' required #itemName=ngModel class='form-control'>
                         Done: <input type='checkbox' [(ngModel)]='item.done'/>
                     </div>
                     <div class='modal-footer'>
