@@ -17,8 +17,6 @@ export class BucketlistDetailComponent implements OnInit {
     currentName: string;
     currentDone: boolean;
     id: number = +this._route.snapshot.params['id'];
-    errorDuplicate = false;
-    errorBlank = false;
 
     constructor(private _bucketlistService: BucketlistService,
                 private _router: Router, 
@@ -34,7 +32,6 @@ export class BucketlistDetailComponent implements OnInit {
             error => {this.toastr.error('You must login to see your bucket items.', 'Oops!');
             this._router.navigate(['auth/user'])}
         );
-        
     }
 
     createItem(): void {
@@ -54,8 +51,7 @@ export class BucketlistDetailComponent implements OnInit {
                 else if(error.name && error.name[0] == 'This item already exists.') {
                     this.toastr.error('This item already exists.', 'Try Again!');
                 }
-            }
-        );
+            });
     }
 
     updateItem(item_id: number, name: string, done: boolean, index: any): void {

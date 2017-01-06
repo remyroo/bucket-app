@@ -12,7 +12,6 @@ import { AuthService } from './auth.service';
 export class AuthUserComponent {
     username: string;
     password: string;
-    errorMessage = false;
 
     constructor(private _router: Router,
                 private _authService: AuthService,
@@ -31,7 +30,6 @@ export class AuthUserComponent {
         }
 
     loginUser(): void {
-        this.errorMessage = false;
         this._authService.loginUser(this.username, this.password)
             .subscribe(result => {
                 this._router.navigate(['bucket']);

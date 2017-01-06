@@ -1,20 +1,19 @@
-<h3 id='header'>Your bucketlists</h3>
 <div>
    <input type='text' [(ngModel)]='name' id='nameInput' placeholder='Name'/>
-   <button class='buttons btn btn-outline-primary waves-effect'(click)='createBucketlist()'>New bucket</button>
+   <button class='btn btn-default'(click)='createBucketlist()'>New bucket</button>
 </div>
 <!--Panel-->
 <div class="container">
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
             <div class="data" *ngIf='bucketlists'>
                 <div class="card text-xs-center" *ngFor='let bucketlist of bucketlists | paginate: { itemsPerPage: 10, currentPage: p, totalItems: count }; let i = index'>
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                     <div class="card-block">
-                        <h3 class="card-title"><a [routerLink]="['/bucket', bucketlist.id]"> {{ bucketlist.name }}</a></h3>
-                        <button class='buttons btn btn-default' data-toggle='modal' [attr.data-target]="'#myModal' + i"
+                        <h3 class="card-title"><a [routerLink]="['/bucket', bucketlist.id]">{{ bucketlist.name }}</a></h3>
+                        <button class='btn btn-default' data-toggle='modal' [attr.data-target]="'#myModal' + i"
                                 (click)='onEdit(bucketlist.name)'>Edit</button>
-                        <button class='buttons btn btn-default' (click)='deleteBucketlist(bucketlist.id)'>Delete</button>
+                        <button class='btn btn-default' (click)='deleteBucketlist(bucketlist.id)'>Delete</button>
                     </div>
                     <div class="card-footer text-muted default-color-dark white-text">
                         <p class="footer">date created: {{ bucketlist.date_created }}<br>date modified: {{ bucketlist.date_modified }}</p>
@@ -30,10 +29,10 @@
                                 <h4 class='modal-title'>Edit {{bucketlist.name}}</h4>
                             </div>
                             <div class='modal-body'>
-                                Name: <input type='text' required [(ngModel)]='bucketlist.name' #bucketlistName=ngModel class='form-control' />
+                                Write a new name for this bucket:<input type='text' required [(ngModel)]='bucketlist.name' #bucketlistName=ngModel class='form-control' />
                             </div>
                             <div class='modal-footer'>
-                                <button class='buttons btn btn-outline-primary waves-effect'(click)='updateBucketlist(bucketlist.id, bucketlist.name, i);' data-dismiss='modal'[disabled]='bucketlistName.invalid'>Save</button>
+                                <button class='btn btn-default'(click)='updateBucketlist(bucketlist.id, bucketlist.name, i);' data-dismiss='modal'[disabled]='bucketlistName.invalid'>Save</button>
                             </div>
                             </div>
                         </div>

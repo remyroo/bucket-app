@@ -14,7 +14,7 @@
         <label class="sr-only" for="pwd">Password</label>
         <input type="password" required class="form-control" id="pwd" placeholder="Password" [(ngModel)]='password'>
     </div>
-        <button type="button" class="btn btn-outline-primary waves-effect" (click)='loginUser()'>Log in</button>
+        <button type="button" class="btn btn-default" (click)='loginUser()'>Log in</button>
         <div><a data-toggle='modal' [attr.data-target]="'#myModal'">Or click here to sign up!</a></div>
     <!-- User registration Modal -->
     <div [id]="'myModal'" class='modal fade' role='dialog'>

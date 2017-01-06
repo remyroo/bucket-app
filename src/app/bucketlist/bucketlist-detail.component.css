@@ -1,4 +1,16 @@
 #nameInput {
     width: 50%;
-    display: inline-block;
+}
+
+.header {
+    margin-bottom: 50px;
+}
+
+.pager {
+    margin: 40px 0;
+}
+
+.pager li>a, .pager li>span {
+    color: #2BBBAD;
+    background-color: transparent !important; 
 }

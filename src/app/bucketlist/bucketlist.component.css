@@ -1,9 +1,7 @@
-#header{
-    margin-top: 85px;
-}
-
 #nameInput {
-    width: 50%; 
+    margin-left: 200px;
+    margin-top: 85px;
+    width: 30%; 
 }
 
 .card-title {
@@ -19,17 +17,12 @@
     position: relative;
 }
 
-.card-footer {
-    width: 100%;
-    position: relative;
-}
-
 .footer {
     display: inline-block;
     font-size: small;
     color: #2BBBAD;
     font-weight: 500;
-    margin-top: 50%;
+    margin-top: 30%;
 }
 
 .default-color-dark {

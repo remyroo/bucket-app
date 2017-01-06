@@ -1,17 +1,13 @@
 <div>
-<nav class='navbar navbar-default'>
-    <div class='container-fluid'>
-        <ul class='nav navbar-nav'>
-            <li><a [routerLink]="['/bucket']">Back to your buckets</a></li>
-        </ul>
-    </div>
-</nav>
+    <ul class="pager">
+    <li class="previous"><a [routerLink]="['/bucket']">Back to your buckets</a></li>
+    </ul>
 </div>
-<div>
-   <input type='text' [(ngModel)]='name' id="nameInput" placeholder="Name"/>
-   <button class='buttons btn btn-outline-primary waves-effect' (click)='createItem()'>New item</button>
+<div class='header'>
+    <h1 *ngIf='bucketlist'> {{bucketlist.name}}</h1>
+    <input type='text' [(ngModel)]='name' id="nameInput" placeholder="Name"/>
+    <button class='btn btn-default' (click)='createItem()'>New item</button>
 </div>
-<h1 *ngIf='bucketlist'> {{bucketlist.name}}</h1>
 <div class='table-responsive'>
 <table class='table'>
     <thead>
@@ -19,7 +15,6 @@
             <th>Name</th>
             <th>Date Created</th>
             <th>Date Modified</th>
-            <th>Created by</th>
             <th>Done</th>
         </tr>
     </thead>
@@ -28,13 +23,12 @@
             <td>{{ item.name }}</td>
             <td>{{ item.date_created }}</td>
             <td>{{ item.date_modified }}</td>
-            <td>{{ item.created_by }}</td>
             <td> <i class="glyphicon glyphicon-ok" *ngIf='item.done'></i>
                  <i class="glyphicon glyphicon-remove" *ngIf='!item.done'></i></td>
             <td>
-                <button type="button" class="buttons btn btn-outline-primary waves-effect" data-toggle="modal" [attr.data-target]="'#myModal' + i"
+                <button type="button" class="btn btn-default" data-toggle="modal" [attr.data-target]="'#myModal' + i"
                 (click)='onEdit(item.name, item.done)'>Edit</button>
-                <button class='buttons btn btn-outline-danger waves-effect' (click)='deleteItem(item.id)'>Delete</button>
+                <button class='btn btn-default' (click)='deleteItem(item.id)'>Delete</button>
             </td>
             <!-- Modal -->
             <div [id]="'myModal' + i" class="modal fade" role="dialog">
@@ -50,7 +44,7 @@
                         Done: <input type='checkbox' [(ngModel)]='item.done'/>
                     </div>
                     <div class='modal-footer'>
-                        <button class='buttons btn btn-outline-primary waves-effect'(click)='updateItem(item.id, item.name, item.done, i)'  data-dismiss='modal' [disabled]='itemName.invalid'>Save</button>
+                        <button class='btn btn-default'(click)='updateItem(item.id, item.name, item.done, i)'  data-dismiss='modal' [disabled]='itemName.invalid'>Save</button>
                     </div>
                     </div>
                 </div>
@@ -58,6 +52,3 @@
         </tr>
         <div class='row'><pagination-controls (pageChange)="p = $event" #api></pagination-controls></div>
     </tbody>
-
-    
-
