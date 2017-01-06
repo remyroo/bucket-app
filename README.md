@@ -1,6 +1,9 @@
+![Angular Version](https://img.shields.io/badge/angular-2-red.svg)
+
 # BucketApp
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24.
+It is powered by an API built using Django Rest Framework. You can take a look at the repo here: [cp3](https://github.com/andela-rwachira/cp3/tree/develop)
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
