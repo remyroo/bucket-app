@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.form-control {
+#nameInput {
     display: inline-block;
     margin-top: 85px;
     width: 30%;
@@ -11,7 +11,6 @@
 .card-block{
     display: inline-block;
     margin: 0 auto;
-    /*position: absolute;*/
 }
 
 .card-title {
@@ -35,4 +34,8 @@
 
 .default-color-dark {
      background-color: transparent !important; 
+}
+
+.modal-content {
+    text-align: left;
 }

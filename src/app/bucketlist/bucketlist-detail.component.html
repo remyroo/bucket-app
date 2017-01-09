@@ -1,6 +1,8 @@
+<div class='text container'>
 <div>
     <ul class="pager">
-    <li class="previous"><a [routerLink]="['/bucket']">Back to your buckets</a></li>
+        <li class="previous"><a [routerLink]="['/bucket']">
+            <i class="glyphicon glyphicon-circle-arrow-left"></i>Back</a></li>
     </ul>
 </div>
 <div class='header'>
@@ -28,7 +30,7 @@
             <td>
                 <button type="button" class="btn btn-default" data-toggle="modal" [attr.data-target]="'#myModal' + i"
                 (click)='onEdit(item.name, item.done)'>Edit</button>
-                <button class='btn btn-default' (click)='deleteItem(item.id)'>Delete</button>
+                <button class='btn btn-default' (click)='deleteItem(item.id, i)'>Delete</button>
             </td>
             <!-- Modal -->
             <div [id]="'myModal' + i" class="modal fade" role="dialog">

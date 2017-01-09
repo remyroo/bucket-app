@@ -12,6 +12,7 @@ import { AuthService } from './auth.service';
 export class AuthUserComponent {
     username: string;
     password: string;
+    isLoggedIn: boolean;
 
     constructor(private _router: Router,
                 private _authService: AuthService,
@@ -43,4 +44,16 @@ export class AuthUserComponent {
                 }
             }
             );}
+// }
+
+    userStatus(): boolean {
+        // checks if a user is logged in to toggle
+        // on/off the Back button from the login page
+        if (localStorage.getItem('token')) {
+        return this.isLoggedIn = true;
+        }
+        else {
+        return this.isLoggedIn = false;
+        }
+    }
 }

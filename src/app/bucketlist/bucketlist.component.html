@@ -1,5 +1,5 @@
 <div class='text container'>
-   <input type='text' class="form-control" [(ngModel)]='name' id='nameInput' placeholder='Name'/>
+   <input type='text' class="form-control" [(ngModel)]='name' id='nameInput' placeholder='Add a new bucket!'/>
    <button class='btn btn-default'(click)='createBucketlist()'>New bucket</button>
 </div>
 <!--Panel-->
@@ -13,7 +13,7 @@
                         <h3 class="card-title"><a [routerLink]="['/bucket', bucketlist.id]">{{ bucketlist.name }}</a></h3>
                         <button class='btn btn-default' data-toggle='modal' [attr.data-target]="'#myModal' + i"
                                 (click)='onEdit(bucketlist.name)'>Edit</button>
-                        <button class='btn btn-default' (click)='deleteBucketlist(bucketlist.id)'>Delete</button>
+                        <button class='btn btn-default' (click)='deleteBucketlist(bucketlist.id, i)'>Delete</button>
                     </div>
                     <div class="card-footer text-muted default-color-dark white-text">
                         <p class="footer">created: {{ bucketlist.date_created | date:'medium' }}<br>edited: {{ bucketlist.date_modified | date:'medium' }}</p>
@@ -29,7 +29,8 @@
                                 <h4 class='modal-title'>Edit {{bucketlist.name}}</h4>
                             </div>
                             <div class='modal-body'>
-                                Write a new name for this bucket:<input type='text' required [(ngModel)]='bucketlist.name' #bucketlistName=ngModel class='form-control' />
+                                <!--<p>Enter a new name below</p>-->
+                                <input type='text' required [(ngModel)]='bucketlist.name' #bucketlistName=ngModel class='form-control'/>
                             </div>
                             <div class='modal-footer'>
                                 <button class='btn btn-default'(click)='updateBucketlist(bucketlist.id, bucketlist.name, i);' data-dismiss='modal'[disabled]='bucketlistName.invalid'>Save</button>

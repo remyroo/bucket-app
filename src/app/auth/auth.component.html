@@ -1,4 +1,7 @@
 <div class="text container">
+    <a [routerLink]="['/bucket']" button type="button" class="btn btn-default btn-block" id='alertButton' *ngIf='userStatus()'>
+        You're still logged in!<br>Click me to return to your buckets or click logout if you're done for the day.
+    </a>
     <div class="page-header">
         <h1>Welcome to Bucket</h1>      
     </div>

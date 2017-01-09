@@ -27,7 +27,7 @@ export class BucketlistDetailComponent implements OnInit {
     ngOnInit(): void {
         this._bucketlistService.getBucketlist(this.id)
             .subscribe((bucketlist) => {
-                this.bucketlist = bucketlist
+                this.bucketlist = bucketlist;
             },
             error => {this.toastr.error('You must login to see your bucket items.', 'Oops!');
             this._router.navigate(['auth/user'])}
@@ -38,8 +38,10 @@ export class BucketlistDetailComponent implements OnInit {
         // handles item creation, uses toastr to raise flash messages
         this._bucketlistService.createItem(this.id, this.name)
             .subscribe(result => {
-                console.log('Item created')
-                this.bucketlist.items.push(result)
+                console.log('Item created');
+                this.toastr.success(this.name + ' has been created', 'Success!');
+                this.name=""; // clears the input field on submit
+                this.bucketlist.items.push(result); // updates the data on the DOM
             },
             error => {
                 if(error.name && error.name[0] == 'This field is required.') {
@@ -49,39 +51,41 @@ export class BucketlistDetailComponent implements OnInit {
                     this.toastr.error('Please enter a valid item name.', 'Try Again!');
                 }
                 else if(error.name && error.name[0] == 'This item already exists.') {
-                    this.toastr.error('This item already exists.', 'Try Again!');
+                    this.toastr.error(this.name + ' already exists.', 'Try Again!');
                 }
             });
     }
 
-    updateItem(item_id: number, name: string, done: boolean, index: any): void {
+    updateItem(item_id: number, name: string, done: boolean, index: number): void {
         // checks if a field has changed to determine which update function to call
         if(name != this.currentName) {
         this._bucketlistService.updateItemName(this.id, item_id, name)
             .subscribe(result => {
-                console.log('Item name updated')
+                console.log('Item name updated');
+                this.toastr.success('Update successful');
             },
             error => {
                 if(error.name && error.name[0] == 'This item already exists.') {
                         this.bucketlist.items[index].name = this.currentName; // reverts duplicate value to original pre-edit value
-                        this.toastr.error('This item already exists.', 'Try Again!');
+                        this.toastr.error(name + ' already exists.', 'Try Again!');
                     }
             });
         }
         else if(done != this.currentDone) {
         this._bucketlistService.updateItemDone(this.id, item_id, done)
             .subscribe(result => {
-                console.log('Item done updated')
+                console.log('Item done updated');
+                this.toastr.success('Update successful');
             });
         }
     }
 
-    deleteItem(item_id: number): void {
+    deleteItem(item_id: number, index: number): void {
         this._bucketlistService.deleteItem(this.id, item_id)
             .subscribe(result => {
-                console.log('Item deleted')
-                this.bucketlist.items.pop()
-                this.toastr.success('Delete successful')
+                console.log('Item deleted');
+                this.bucketlist.items.splice(index, 1); // updates the data on the DOM
+                this.toastr.success('Delete successful');
             })
     }
 
@@ -91,7 +95,7 @@ export class BucketlistDetailComponent implements OnInit {
         this.currentDone = done;
     }
 
-    cancelEdit(index): void {
+    cancelEdit(index: number): void {
         // reverts to the pre-edit value when modal is closed
         this.bucketlist.items[index].name = this.currentName;
     }
