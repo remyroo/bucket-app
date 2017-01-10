@@ -37,5 +37,14 @@
 }
 
 .modal-content {
+    background-image: url(./assets/images/vintage_speckles.png);
     text-align: left;
+}
+
+.modal-header {
+    border-bottom-color: #2BBBAD;
+}
+
+.modal-footer {
+    border-top-color: #2BBBAD;
 }
