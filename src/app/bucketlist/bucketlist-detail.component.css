@@ -32,3 +32,15 @@
 .table>tbody>tr>td {
     vertical-align: middle;
 }
+
+.modal-content {
+    background-image: url(./assets/images/vintage_speckles.png);
+}
+
+.modal-header {
+    border-bottom-color: #2BBBAD;
+}
+
+.modal-footer {
+    border-top-color: #2BBBAD;
+}

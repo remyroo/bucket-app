@@ -11,6 +11,18 @@
     display: inline-block;
 }
 
+.modal-content {
+    background-image: url(./assets/images/vintage_speckles.png);
+}
+
+.modal-header {
+    border-bottom-color: #2BBBAD;
+}
+
+.modal-footer {
+    border-top-color: #2BBBAD;
+}
+
 #signup a, a:focus, a:hover {
     color: #ff6f69;
     text-decoration: underline;
