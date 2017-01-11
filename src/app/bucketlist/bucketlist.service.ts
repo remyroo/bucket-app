@@ -10,7 +10,7 @@ import { IBucketlist, IItem, IData } from './bucketlist';
 
 @Injectable()
 export class BucketlistService {
-    private _bucketlistUrl = 'http://127.0.0.1:8000/api/bucket/';
+    private _bucketlistUrl = 'https://cp3-api.herokuapp.com/api/bucket/';
     private _headers: Headers;
     private token: string = localStorage.getItem('token');
 

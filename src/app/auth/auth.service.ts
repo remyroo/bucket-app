@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {
-    private _authUrl = 'http://127.0.0.1:8000/api/auth/';
+    private _authUrl = 'https://cp3-api.herokuapp.com/api/auth/';
     private _headers: Headers;
 
     constructor(private _http: Http){
