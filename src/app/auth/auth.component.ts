@@ -44,7 +44,7 @@ export class AuthUserComponent {
                 }
             }
             );}
-// }
+
 
     userStatus(): boolean {
         // checks if a user is logged in to toggle

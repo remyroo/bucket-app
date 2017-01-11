@@ -33,6 +33,7 @@ import { BucketlistGuard } from './bucketlist/bucketlist-guard.service';
       {path: 'bucket/:id', 
             canActivate: [ BucketlistGuard ],
             component: BucketlistDetailComponent},
+      {path: '', redirectTo: 'auth/user', pathMatch: 'full'},
       {path: '**', redirectTo: 'bucket', pathMatch: 'full'}
     ]),
   ],
